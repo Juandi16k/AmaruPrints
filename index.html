@@ -181,6 +181,15 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
 
 /* PRICING */
 .pricing{padding:28px 14px}
+.pricing h2, .pricing .sec-title {
+    color: var(--coal);
+    font-family: 'Fraunces', serif;
+    font-size: 28px; /* Ajusta el tamaño si es necesario */
+    font-weight: 600;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
 .price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
 .pcard{background:var(--white);border-radius:18px;padding:20px 13px;text-align:center;border:2px solid transparent;box-shadow:var(--shadow-card);position:relative;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s}
 .pcard:hover{border-color:var(--terra-border)}
@@ -206,6 +215,7 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
 .form-section{background:var(--coal);padding:32px 14px}
 .form-section .sec-lbl{color:#5A5550}
 .form-section .sec-title{color:var(--cream)}
+.form-section .pricing .sec-title,.form-section .pricing .sec-lbl{color:var(--coal)}
 .form-wrap{background:var(--white);border-radius:var(--radius);padding:26px}
 .form-head{text-align:center;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border-warm)}
 .form-head h3{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--coal)}
@@ -323,7 +333,7 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
 <nav class="nav">
   <div class="logo"><div class="logo-dot"></div>Amaru<em>Prints</em></div>
   <div class="nav-right">
-    <div class="nav-timer"><i class="ti ti-clock"></i>&nbsp;<strong id="navTimer">02:47:18</strong></div>
+
     <button class="btn-pill" onclick="goForm()">Pedir ahora</button>
   </div>
 </nav>
@@ -395,9 +405,9 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
 <div class="urgency-wrap">
   <div class="urgency">
     <div class="urg-top"><i class="ti ti-flame"></i><span>Alta demanda esta semana</span></div>
-    <div class="urg-sub">El 87% de los cupos de personalización ya han sido reservados. Solo quedan <strong>13 cuadros disponibles.</strong></div>
+    <div class="urg-sub">El 87% de los cupos de personalización ya han sido reservados.<strong> reserva ultimas unidades disponibles.</strong></div>
     <div class="bar-bg"><div class="bar-fill" id="stockBar"></div></div>
-    <div class="bar-lbl">87% reservado — 13 cupos restantes</div>
+    <div class="bar-lbl">87% reservado — ultimos cupos restantes</div>
   </div>
 </div>
 
@@ -426,8 +436,8 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
   <div class="pq-text">Más de <em>200 cuadros</em> entregados<br>a todo Colombia</div>
   <div class="pq-sub">Cada uno diseñado, impreso y enmarcado con amor.<br>Tu música favorita, hecha arte físico permanente.</div>
   <div class="pq-pills">
-    <div class="pq-pill"><i class="ti ti-map-pin"></i>Bogotá · Medellín · Cali · y más</div>
-    <div class="pq-pill"><i class="ti ti-star-filled"></i>5.0 promedio de reseñas</div>
+    <div class="pq-pill"><i class="ti ti-map-pin"></i>Bogotá · Medellín · Cali · <strong>y cada rincon del pais.</strong></div>
+    <div class="pq-pill"><i class="ti ti-star"></i> 4.96 promedio de reseñas</div>
     <div class="pq-pill"><i class="ti ti-shield-check"></i>Compra 100% segura</div>
   </div>
 </div>
@@ -526,7 +536,7 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
 
     <div class="trend-body">
       <div class="trend-tags">
-        <span><i class="ti ti-flame" style="color:var(--terra);font-size:11px;margin-right:3px"></i>#1 Tendencia</span>
+        <span><i class="ti ti-flame" style="color:var(--terra);font-size:11px;margin-right:3px"></i>#1 en Tendencia</span>
         <span>Calidad de galería</span>
         <span>Envío a toda Colombia</span>
       </div>
@@ -593,48 +603,6 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
 </div>
 
 <!-- PRICING -->
-<div class="pricing">
-  <div class="sec-lbl">Elige tu combo</div>
-  <div class="sec-title">Precios y combos</div>
-  <div class="price-grid">
-    <div class="pcard" data-combo="1" data-name="Solo (1 Cuadro)" onclick="selectCombo(this)">
-      <div class="pcard-name">Solo</div>
-      <div class="pcard-hook">1 cuadro<br>enmarcado</div>
-      <div class="pcard-old" id="oldPrice1">$49.900</div>
-      <div class="pcard-price" id="price1">$44.900</div>
-      <div class="pcard-sub">COP</div>
-      <div class="pf"><i class="ti ti-check"></i>1 cuadro premium</div>
-      <div class="pf"><i class="ti ti-check"></i>Marco incluido</div>
-      <div class="pf"><i class="ti ti-check"></i>Envío gratis</div>
-      <div class="selected-check"><i class="ti ti-check"></i></div>
-    </div>
-    <div class="pcard featured selected" data-combo="2" data-name="Dúo (2 Cuadros)" onclick="selectCombo(this)">
-      <div class="pcard-ribbon">⚡ Más pedido</div>
-      <div class="pcard-name">Dúo</div>
-      <div class="pcard-hook">2 cuadros<br>enmarcados</div>
-      <div class="pcard-old" id="oldPrice2">$99.900</div>
-      <div class="pcard-price" id="price2">$79.900</div>
-      <div class="pcard-sub">COP — ahorras $20.000</div>
-      <div class="pf"><i class="ti ti-check"></i>2 cuadros premium</div>
-      <div class="pf"><i class="ti ti-check"></i>Marco incluido c/u</div>
-      <div class="pf"><i class="ti ti-check"></i>Envío gratis</div>
-      <div class="selected-check"><i class="ti ti-check"></i></div>
-    </div>
-    <div class="pcard" data-combo="3" data-name="Trío (3 Cuadros)" onclick="selectCombo(this)">
-      <div class="pcard-ribbon" style="background:var(--gold)">🔥 Mejor precio</div>
-      <div class="pcard-name">Trío</div>
-      <div class="pcard-hook">3 cuadros<br>enmarcados</div>
-      <div class="pcard-old" id="oldPrice3">$149.900</div>
-      <div class="pcard-price" id="price3">$109.900</div>
-      <div class="pcard-sub">COP — ahorras $40.000</div>
-      <div class="pf"><i class="ti ti-check"></i>3 cuadros premium</div>
-      <div class="pf"><i class="ti ti-check"></i>Marco incluido c/u</div>
-      <div class="pf"><i class="ti ti-check"></i>Envío gratis</div>
-      <div class="selected-check"><i class="ti ti-check"></i></div>
-    </div>
-  </div>
-  <div class="ship-banner"><i class="ti ti-truck"></i>Envío gratis a todo Colombia · Contra entrega disponible</div>
-</div>
 
 <!-- FORM -->
 <div class="form-section" id="form">
@@ -677,6 +645,49 @@ body{background:var(--cream);color:var(--coal);font-family:'DM Sans',sans-serif;
       <i class="ti ti-info-circle"></i>
       <p>Al confirmar te enviamos el número de Nequi/Daviplata por WhatsApp. Una vez recibamos el pago, iniciamos producción inmediatamente.</p>
     </div>
+    <div class="pricing">
+  <div class="sec-lbl">Elige tu combo</div>
+  <div class="sec-title">Precios y combos</div>
+  <div class="price-grid">
+    <div class="pcard" data-combo="1" data-name="Solo (1 Cuadro)" onclick="selectCombo(this)">
+      <div class="pcard-name">Solo</div>
+      <div class="pcard-hook">1 cuadro<br>enmarcado</div>
+      <div class="pcard-old" id="oldPrice1">$49.900</div>
+      <div class="pcard-price" id="price1">$44.900</div>
+      <div class="pcard-sub">COP</div>
+      <div class="pf"><i class="ti ti-check"></i>1 cuadro premium</div>
+      <div class="pf"><i class="ti ti-check"></i>Marco incluido</div>
+      <div class="pf"><i class="ti ti-check"></i>Envío gratis</div>
+      <div class="selected-check"><i class="ti ti-check"></i></div>
+    </div>
+    <div class="pcard featured selected" data-combo="2" data-name="Dúo (2 Cuadros)" onclick="selectCombo(this)">
+      <div class="pcard-ribbon">⚡ Más pedido</div>
+      <div class="pcard-name">Dúo</div>
+      <div class="pcard-hook">2 cuadros<br>enmarcados</div>
+      <div class="pcard-old" id="oldPrice2">$99.900</div>
+      <div class="pcard-price" id="price2">$79.900</div>
+      <div class="pcard-sub">COP — ahorras $20.000</div>
+      <div class="pf"><i class="ti ti-check"></i>2 cuadros premium</div>
+      <div class="pf"><i class="ti ti-check"></i>Marco incluido c/u</div>
+      <div class="pf"><i class="ti ti-check"></i>Envío gratis</div>
+      <div class="selected-check"><i class="ti ti-check"></i></div>
+    </div>
+    <div class="pcard" data-combo="3" data-name="Trío (3 Cuadros)" onclick="selectCombo(this)">
+      <div class="pcard-ribbon" style="background:var(--gold)">🔥 Mejor precio</div>
+      <div class="pcard-name">Trío</div>
+      <div class="pcard-hook">3 cuadros<br>enmarcados</div>
+      <div class="pcard-old" id="oldPrice3">$149.900</div>
+      <div class="pcard-price" id="price3">$109.900</div>
+      <div class="pcard-sub">COP — ahorras $40.000</div>
+      <div class="pf"><i class="ti ti-check"></i>3 cuadros premium</div>
+      <div class="pf"><i class="ti ti-check"></i>Marco incluido c/u</div>
+      <div class="pf"><i class="ti ti-check"></i>Envío gratis</div>
+      <div class="selected-check"><i class="ti ti-check"></i></div>
+    </div>
+  </div>
+  <div class="ship-banner"><i class="ti ti-truck"></i>Envío gratis a todo Colombia · Contra entrega disponible</div>
+</div>
+
 
     <div class="order-summary">
       <div class="os-title"><i class="ti ti-receipt"></i>Resumen del pedido</div>
