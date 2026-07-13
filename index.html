@@ -786,20 +786,26 @@ function toggleFaq(el){
   if(!open){a.classList.add('open');el.querySelector('i').style.transform='rotate(180deg)';}
 }
 
-function validatePhone(v){return /^3\d{9}$/.test(v.replace(/\s/g,''))}
+function validatePhone(v){
+  let clean = v.replace(/[\s\-\+\(\)]/g,'');
+  if (clean.startsWith('57')) clean = clean.substring(2);
+  return /^3\d{9}$/.test(clean);
+}
 function validateText(v){return v.trim().length>=2}
 
 // ============================================================
 // ENVÍO A GOOGLE SHEETS (no-cors para evitar errores CORS)
 // ============================================================
 async function sendToSheets(data){
-  if(SHEETS_URL==='TU_URL_GOOGLE_APPS_SCRIPT_AQUI') return; // skip si no configurado
+  if(SHEETS_URL==='https://script.google.com/macros/s/AKfycbzvJpSBuGp4i5KOZD4Q3OSNv5gK3LovFukmTpYrWDPYURrvkCx95kQMTTFInnO9vI16hA/exec') return; // skip si no configurado
   try{
+    const params = new URLSearchParams();
+    Object.keys(data).forEach(k => params.append(k, data[k]));
     await fetch(SHEETS_URL,{
       method:'POST',
       mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body: params.toString()
     });
     document.getElementById('sheetStatus').classList.add('show');
   }catch(e){
@@ -844,16 +850,18 @@ async function submitForm(){
     combo:state.comboName,
     metodoPago:payLabel,
     total:fmt(p)+' COP',
-    estado:'Pendiente confirmación'
+    estado:'Pendiente confirmación',
+    estadoPago:'Pendiente',
   };
 
   const btn=document.getElementById('btnSubmit');
   const btnTxt=document.getElementById('btnText');
   btn.disabled=true;
-  btnTxt.textContent='Registrando pedido...';
+  btnTxt.textContent='Generando orden...';
+  btn.style.background='#4A4540';
 
-  // Enviar a Sheets (en paralelo, no bloquea WA)
-  await sendToSheets(pedidoData);
+  // Enviar a Sheets en segundo plano (fire and forget, no bloquea la redirección a WA)
+  sendToSheets(pedidoData);
 
   const msg=encodeURIComponent(
     `¡Hola AmaruPrints! 🎵 Quiero hacer mi pedido:\n\n`+
@@ -868,11 +876,15 @@ async function submitForm(){
     `\n¡Espero su confirmación! 🙌`
   );
 
+  // Detectar si es móvil para evitar bloqueos en navegadores integrados (Instagram/TikTok/FB)
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const targetTab = isMobile ? '_self' : '_blank';
+
   setTimeout(()=>{
-    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`,'_blank');
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`,targetTab);
     btnTxt.textContent='✓ ¡Abre WhatsApp y envía el mensaje!';
     btn.style.background='var(--sage)';
-  },600);
+  },400);
 }
 
 // Timer
